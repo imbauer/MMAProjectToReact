@@ -68,8 +68,24 @@ router.get('/', function(req, res) {
     // mongodb.renderPastEvents(res);
 });
 
+router.get('/upcoming/ufc', function(req, res) {
+    mongodb.renderUpcomingUFCEvents(res);
+});
+
+router.get('/upcoming/bellator', function(req, res) {
+    mongodb.renderUpcomingBellatorEvents(res);
+});
+
 router.get('/upcoming', function(req, res) {
     mongodb.renderUpcomingEvents(res);
+});
+
+router.get('/past/ufc', function(req, res) {
+    mongodb.renderPastUFCEvents(res);
+});
+
+router.get('/past/bellator', function(req, res) {
+    mongodb.renderPastBellatorEvents(res);
 });
 
 router.get('/past', function(req, res) {

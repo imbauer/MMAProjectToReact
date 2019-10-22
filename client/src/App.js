@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import Moment from 'react-moment';
 import mom from 'moment';
 import 'moment-timezone';
-import EventList from './EventList';
 import EventFilter from './EventFilter';
-import { NavBar, About } from './components'
+import { EventList, NavBar, Footer } from './components'
 import logo from "./logo.svg";
 import "./App.css";
 import globe from './globeresize.png';
@@ -14,63 +13,80 @@ import arrows from './arrows2.png';
 class App extends Component {
     constructor(props) {
         super(props);
+        this.initTimezone = this.initTimezone.bind(this);
         this.stateChange = this.stateChange.bind(this);
         this.change = this.change.bind(this);
         this.onCheckChange = this.onCheckChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
-        this.callDBUpcoming = this.callDBUpcoming.bind(this);
-        this.callDBPast = this.callDBPast.bind(this);
+        this.callUpcoming = this.callUpcoming.bind(this);
+        this.callUpcomingUFC = this.callUpcomingUFC.bind(this);
+        this.callUpcomingBellator = this.callUpcomingBellator.bind(this);
+        this.callPast = this.callPast.bind(this);
+        this.callPastUFC = this.callPastUFC.bind(this);
+        this.callPastBellator = this.callPastBellator.bind(this);
+        this.callNothing = this.callNothing.bind(this);
         this.state = {
-            value: "select",
+            value: "",
             ufc: true,
             bellator: false,
             radio1: "upcoming",
-            apiResponse: "",
             dbResponse: [{d:"",h:"",m:"",s:"",name:"Max",title:"Kraynov", when: {monthString:'January',weekDay:'',day:'',year:'',hour:'',minute:'',offset:''}},{d:"",h:"",m:"",s:"",name:"Jerome",title:"Blume", when: {monthString:'January',weekDay:'',day:'',year:'',hour:'',minute:'',offset:''}}]
         };
     }
 
-    callAPI() {
-        fetch("http://192.168.99.100:9000/testAPI")
-            .then(res => res.text())
-            .then(res => this.setState({ apiResponse: res }))
-            .catch(err => err);
-    }
+
 
     stateChange() {
         this.setState({ dbResponse: [{name:'HEY', title:'YOU'}] })
     }
 
-    // callDB() {
-    //     fetch("http://192.168.99.100:9000/testDB")
-    //         .then(res => res.json())
-    //         .then(res => this.setState({ dbResponse: res.express }))
-    //         .catch(err => err);
-    // }
 
-    // callDB2() {
-    //     fetch("http://192.168.99.100:9000/testDB/twoResults")
-    //         .then(res => res.json())
-    //         .then(res => this.setState({ dbResponse: res.express }))
-    //         .catch(err => err);
-    // }
-    callDBUpcoming() {
+
+    initTimezone() {
+        this.setState({value: 'US/Eastern'});
+    }
+
+    callUpcoming() {
         fetch("http://192.168.99.100:9000/promotions/upcoming")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
-    callDBPast() {
-        fetch("http://192.168.99.100:9000/promotions/past")
+    callUpcomingUFC() {
+        fetch("http://192.168.99.100:9000/promotions/upcoming/ufc")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+    callUpcomingBellator() {
+        fetch("http://192.168.99.100:9000/promotions/upcoming/bellator")
             .then(res => res.json())
             .then(res => this.setState({ dbResponse: res.results }))
             .catch(err => err);
     }
 
-    componentDidMount() {
-        this.callAPI();
-        // this.callDB();
+    callPast() {
+        fetch("http://192.168.99.100:9000/promotions/past")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
     }
+    callPastUFC() {
+        fetch("http://192.168.99.100:9000/promotions/past/ufc")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+    callPastBellator() {
+        fetch("http://192.168.99.100:9000/promotions/past/bellator")
+            .then(res => res.json())
+            .then(res => this.setState({ dbResponse: res.results }))
+            .catch(err => err);
+    }
+    callNothing() {
+        this.setState({ dbResponse: [] })
+    }
+
     onCheckChange(e) {
         console.log(e.target.checked, e.target.name);
         this.setState({
@@ -80,11 +96,26 @@ class App extends Component {
             console.log('radio1 ' + this.state.radio1);
             console.log('ufc ' + this.state.ufc);
             console.log('bellator ' + this.state.bellator);
-            if (this.state.ufc === true && this.state.bellator === true) {
-                this.callDBUpcoming();
+            if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming") {
+                this.callUpcoming();
             }
-            else {
-                this.callDBPast();
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming") {
+                this.callUpcomingUFC();
+            }
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming") {
+                this.callUpcomingBellator();
+            }
+            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past") {
+                this.callPast();
+            }
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past") {
+                this.callPastUFC();
+            }
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past") {
+                this.callPastBellator();
+            }
+            else if (this.state.ufc !== true && this.state.bellator !== true) {
+                this.callNothing();
             }
         });
     }
@@ -98,11 +129,26 @@ class App extends Component {
             console.log('radio1 ' + this.state.radio1);
             console.log('ufc ' + this.state.ufc);
             console.log('bellator ' + this.state.bellator);
-            if (this.state.ufc === true && this.state.bellator === true) {
-                this.callDBUpcoming();
+            if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "upcoming") {
+                this.callUpcoming();
             }
-            else {
-                this.callDBPast();
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "upcoming") {
+                this.callUpcomingUFC();
+            }
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "upcoming") {
+                this.callUpcomingBellator();
+            }
+            else if (this.state.ufc === true && this.state.bellator === true && this.state.radio1 === "past") {
+                this.callPast();
+            }
+            else if (this.state.ufc === true && this.state.bellator !== true && this.state.radio1 === "past") {
+                this.callPastUFC();
+            }
+            else if (this.state.ufc !== true && this.state.bellator === true && this.state.radio1 === "past") {
+                this.callPastBellator();
+            }
+            else if (this.state.ufc !== true && this.state.bellator !== true) {
+                this.callNothing();
             }
         });
     }
@@ -111,7 +157,9 @@ class App extends Component {
         this.setState({value: event.target.value});
     }
 
-
+    componentDidMount() {
+        this.callUpcomingUFC();
+    }
 
     render() {
         return (
@@ -120,16 +168,15 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <About />
 
 
 
-                <section className="hero is-medium is-bold has-background-dark">
+                <section className="hero is-medium is-bold" style={{backgroundColor:'#282c34'}}>
                     <div className="hero-body">
                         <div className="container">
                             <h1 className="title has-text-light big-text">
                                 A <span className="has-text-primary">Website</span> that provides the exact <span className="has-text-primary">time</span>,
-                                regardless of <span class="has-text-primary">time zone</span>, of every <span className="has-text-primary">MMA Event</span>
+                                regardless of <span className="has-text-primary">time zone</span>, of every <span className="has-text-primary">MMA Event</span>
                             </h1>
 
                             <div className="columns mobile is-vcentered" style={{textAlign:'center',position:'relative'}}>
@@ -270,20 +317,10 @@ class App extends Component {
                     </div>
                 </section>
 
-                <NavBar/>
-                <div>
-
-
-                  <br />
-                  UFC: {this.state.ufc.toString()} <br />
-                  Bellator: {this.state.bellator.toString()} <br />
-                  Radio: {this.state.radio1} <br />
-                </div>
-
-                hello7771
-                <p className="App-intro">{this.state.apiResponse}</p>
                 <EventFilter />
                 <EventList events={this.state.dbResponse} selectValue={this.state.value} />
+
+
 
             </div>
         );

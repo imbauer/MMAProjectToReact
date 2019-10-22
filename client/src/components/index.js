@@ -1,7 +1,9 @@
 import NavBar from './NavBar/NavBar';
-import About from './About/About';
+import Footer from './Footer/Footer';
+import EventList from './EventList/EventList';
 
 export {
+    EventList,
     NavBar,
-    About
+    Footer
 };

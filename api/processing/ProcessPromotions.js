@@ -152,7 +152,7 @@ module.exports =
                 hour = '16';
             }
             var when = {
-                offset : 'America/New_York',
+                offset : 'US/Eastern',
                 year : (info[2][0]),
                 month : ("0" + (info[2][1])).slice(-2),
                 monthString: months[parseInt(info[2][1]) - 1],
@@ -335,7 +335,7 @@ module.exports =
                     hour = '14';
                 }
                 var when = {
-                    offset : 'America/New_York',
+                    offset : 'US/Eastern',
                     year : (info[2][2]),
                     month : ("0" + (month)).slice(-2),
                     monthString: info[2][0],

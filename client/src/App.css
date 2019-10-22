@@ -460,7 +460,7 @@ label + input[type=radio] + label {
 }
 
 .styled select {
-  background: hsl(0, 0%, 21%);
+  background: #282c34;
   /* background:none; */
   background-image:url('worldmapteal50.png');
   background-size:80%;
@@ -560,4 +560,23 @@ label + input[type=radio] + label {
 	left: 10px;
 	width: 100px;
 	height: 100px;
+}
+
+.inner {
+    width: 80%;
+    margin: auto;
+    padding: 20px 10px;
+}
+
+.ufcBackground {
+    background-image:url('./images/ufcLogo30.png');
+    background-repeat: no-repeat;
+    background-size:30%;
+    background-position:center;
+}
+.bellatorBackground {
+    background-image:url('./images/bellatorLogo30.png');
+    background-repeat:no-repeat;
+    background-size:20%;
+    background-position:center;
 }
