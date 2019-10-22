@@ -164,12 +164,6 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-
-
 
                 <section className="hero is-medium is-bold" style={{backgroundColor:'#282c34'}}>
                     <div className="hero-body">
@@ -189,8 +183,8 @@ class App extends Component {
                                     <div className="seperator">
                                         <div className="containerCheckBoxes verticalAlign">
                                             <ul className="ks-cboxtags" style={{fontSize:1.5+'em'}}>
-                                                <input type="checkbox" name="ufc" checked={this.state.ufc} onChange={this.onCheckChange} /><label>UFC</label>
-                                                <input type="checkbox" name="bellator" checked={this.state.bellator} onChange={this.onCheckChange} /><label>Bellator</label>
+                                                <li><input type="checkbox" name="ufc" id="checkboxOne" checked={this.state.ufc} onChange={this.onCheckChange} /><label for="checkboxOne">UFC</label></li>
+                                                <li><input type="checkbox" name="bellator" id="checkboxTwo" checked={this.state.bellator} onChange={this.onCheckChange} /><label for="checkboxTwo">Bellator</label></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -294,7 +288,6 @@ class App extends Component {
                                     </div>
                                 </div>
 
-
                                 <div className="column mobile is-one-third">
                                     <div className="seperator">
                                         <img className="imageSize" src={arrows} alt={"arrows"} />
@@ -303,13 +296,11 @@ class App extends Component {
                                     <div className="seperator">
                                         <form className="verticalAlign">
                                             <div className="radio-group">
-                                                <input type="radio" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" /><label className="timeLabel">UPCOMING</label><input type="radio" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} /><label className="timeLabel">PAST</label>
+                                                <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" /><label className="timeLabel" for="when-one">UPCOMING</label><input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} /><label className="timeLabel" for="when-two">PAST</label>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-
-
 
                             </div>
 
@@ -319,8 +310,6 @@ class App extends Component {
 
                 <EventFilter />
                 <EventList events={this.state.dbResponse} selectValue={this.state.value} />
-
-
 
             </div>
         );

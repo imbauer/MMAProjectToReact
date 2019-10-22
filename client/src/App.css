@@ -82,7 +82,7 @@ ul.ks-cboxtags li label::before {
     transition: transform .3s ease-in-out;
 }
 
-/* ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
     content: "\2713";
     transform: rotate(-360deg);
     transition: transform .3s ease-in-out;
@@ -104,7 +104,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   border: 2px solid #e9a1ff;
-} */
+}
 
 .imageSize {
     height:50%;
@@ -303,7 +303,7 @@ label {
   cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
-/* input[type="checkbox"] {
+input[type="checkbox"] {
   opacity: 0;
   width: 0;
   height: 0;
@@ -330,7 +330,7 @@ input[type="checkbox"]:checked ~ label .line {
 }
 input[type="checkbox"]:checked ~ label .line2 {
   transform: rotate(0);
-} */
+}
 
 .sign {
     color: #aaa;
@@ -428,11 +428,11 @@ button::before, button::after {
 }
 
 
-/* input[type=radio] {
+input[type=radio] {
   position: absolute;
   visibility: hidden;
   display: none;
-} */
+}
 label.timeLabel  {
   color: #9a929e;
   display: inline-block;
@@ -441,13 +441,13 @@ label.timeLabel  {
   font-size:2em;
   padding: 5px 20px;
 }
-/* input[type=radio]:checked + label {
+input[type=radio]:checked + label {
   color: #ccc8ce;
   background: #675f6b;
 }
 label + input[type=radio] + label {
   border-left: solid 3px #675f6b;
-} */
+}
 .radio-group {
   border: solid 3px #675f6b;
   display: inline-block;
@@ -545,6 +545,7 @@ label + input[type=radio] + label {
 	position: relative;
 	width: 100px;
 	height: 100px;
+    font-family: 'Lato', sans-serif;
 }
 
 .countdown-item span {
