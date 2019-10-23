@@ -20,14 +20,14 @@ function repeatProcess(event) {
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
             var data = JSON.parse(body);
-            console.log('=================================ALL EVENTS FOR SPECIFIC EVENT=============================');
-            console.log(data);
-            console.log('-------------------------------------------------------------------------------------------');
+            // console.log('=================================ALL EVENTS FOR SPECIFIC EVENT=============================');
+            // console.log(data);
+            // console.log('-------------------------------------------------------------------------------------------');
             for (var i = 0; i < data.length; i++) {
                 mongodb.addEvent(data[i]);
             }
             if (data[0].nextEvent !== null || data[0].nextEvent !== '' || data[0].nextEvent !== undefined) {
-                console.log(data[0].name + ' WORKED');
+                // console.log(data[0].name + ' WORKED');
                 if (data[0].nextEvent.includes('following')) {
                     console.log('Exited without issue');
                     return;
@@ -47,10 +47,10 @@ router.get('/bellator/event/:eventName', function(req, res) {
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
             var data = JSON.parse(body);
-            console.log('============================================');
-            console.log('Data length');
-            console.log(data.length);
-            console.log('============================================');
+            // console.log('============================================');
+            // console.log('Data length');
+            // console.log(data.length);
+            // console.log('============================================');
             for (var i = 0; i < data.length; i++) {
                 mongodb.addEvent(data[i]);
             }

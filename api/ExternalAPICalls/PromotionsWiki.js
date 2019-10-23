@@ -8,7 +8,7 @@ router.get('/ufc/event/:eventName', function(req, res, next) {
 
     var currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvslots=*&rvprop=content&format=json&utf8=true&titles=" + encodeURIComponent(currentEvent).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
-    console.log(url);
+    // console.log(url);
     request(url, function (err, response, body) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);
@@ -25,7 +25,7 @@ router.get('/bellator/event/:eventName', function(req, res, next) {
 
     var currentEvent = req.params.eventName.replace(/\s/g, '\%20').replace(/\+/g, '\%2B');
     var url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvslots=*&rvprop=content&format=json&utf8=true&titles=" + encodeURIComponent(currentEvent).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
-    console.log(url);
+    // console.log(url);
     request(url, function (err, response, body) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);

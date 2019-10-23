@@ -180,7 +180,7 @@ module.exports = {
             function(err, doc){
                 if (err){console.log(err)}
                 else {
-                    console.log('Event already exists in DB ---> Checking fight order and refreshing');
+                    // console.log('Event already exists in DB ---> Checking fight order and refreshing');
                 }
             }
         );
@@ -191,11 +191,11 @@ module.exports = {
             function(err, doc){
                 if (err){console.log(err)}
                 else {
-                    console.log('Event already exists in DB ---> Checking fight order and refreshing');
+                    // console.log('Event already exists in DB ---> Checking fight order and refreshing');
                 }
             }
         );
-        console.log('================================DATA SAVED===================================');
+        // console.log('================================DATA SAVED===================================');
     },
 
 
@@ -356,19 +356,20 @@ module.exports = {
         function getEventTime(event) {
             return EventTimes.findOne({name:event.name, title: event.title, event: event.event})
             .then((eventTime) => {
-                console.log('====== FOUND EVENT TIME ==========');
+                // console.log('====== FOUND EVENT TIME ==========');
                 if (eventTime !== null) {
-                    console.log(eventTime.hour);
-                    console.log(eventTime.minute);
-                    console.log(eventTime);
+                    // console.log(eventTime.hour);
+                    // console.log(eventTime.minute);
+                    // console.log(eventTime);
                     event.when.hour = ("0" + eventTime.hour).slice(-2);
                     event.when.minute = ("0" + eventTime.minute).slice(-2);
-                    console.log(event.when);
+                    // console.log(event.when);
                 }
+                console.log('About to run CHECKER');
                 getOldEvent(event);
             })
             .catch((err) => {
-                console.log('========= DIDNT FIND EVENT TIME >:C ============');
+                // console.log('========= DIDNT FIND EVENT TIME >:C ============');
                 getOldEvent(event);
                 console.log(err);
             });
@@ -378,10 +379,19 @@ module.exports = {
 
 
         function getOldEvent(event) {
+            console.log('Running Checker');
+            console.log(event.name);
+            console.log(event.title);
+            console.log(event.event);
             return Events.findOne({name:event.name, title: event.title, event: event.event}) // Notice the return here
             .lean()
             .exec()
             .then((previousEvent) => {
+                console.log(event.name);
+                console.log('New');
+                console.log(event.fightCard[2][3]);
+                console.log('Old');
+                console.log(previousEvent.fightCard[2][1]);
 
                 if (previousEvent.fightCard !== undefined || previousEvent.fightCard !== null || previousEvent.fightCard !== []) {
                     for (var i = 0; i < previousEvent.fightCard.length; i++) {
@@ -434,6 +444,7 @@ module.exports = {
                 );
             });
         }
+        console.log('About to run getEventTime');
         getEventTime(event);
 
     },
