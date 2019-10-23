@@ -111,7 +111,7 @@ class Event extends Component {
         var timezone = this.state.timeObject.replace(/.*:00 /g, '');
         return (
             <div>
-            <div className="columns height is-vcentered work__list-item is-mobile" style={{ textAlign:'center',position: 'relative',marginTop:1+'px',marginBottom:1+'px' }}>
+            <div className="columns height is-vcentered work__list-item is-mobile is-gapless" style={{ textAlign:'center',position: 'relative',marginTop:1+'px',marginBottom:1+'px' }}>
 
                 <div className="column height countdown-wrapper" style={{ fontSize:1.7+'em',textAlign:'center' }}>
 

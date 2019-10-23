@@ -57,32 +57,32 @@ class Countdown extends React.Component {
 
 
         return (
-            <div className="columns is-multiline is-mobile verticalAlign" style={{margin:0}}>
+            <div className="columns is-multiline is-mobile verticalAlign" style={{margin:0,display:'flex',justifyContent: 'space-between'}}>
                 {days >= 0 && (
-                    <div className="column countdown-item" style={{textAlign:'center'}}>
+                    <div className="countdown-item" style={{backgroundColor:'teal'}}>
                         <SVGCircle radius={daysRadius} />
-                        {days}
+                        <div style={{}}>{days}</div>
                         <span>days</span>
                     </div>
                 )}
                 {hours >= 0 && (
-                    <div className="column countdown-item" style={{textAlign:'center'}}>
+                    <div className="countdown-item" style={{backgroundColor:'yellow'}}>
                         <SVGCircle radius={hoursRadius} />
-                        {hours}
+                        <div style={{}}>{hours}</div>
                         <span>hours</span>
                     </div>
                 )}
                 {minutes >= 0 && (
-                    <div className="column countdown-item" style={{textAlign:'center'}}>
+                    <div className="countdown-item" style={{backgroundColor:'orange'}}>
                         <SVGCircle radius={minutesRadius} />
-                        {minutes}
+                        <div style={{}}>{minutes}</div>
                         <span>minutes</span>
                     </div>
                 )}
                 {seconds >= 0 && (
-                    <div className="column countdown-item" style={{textAlign:'center'}}>
+                    <div className="countdown-item" style={{backgroundColor:'blue'}}>
                         <SVGCircle radius={secondsRadius} />
-                        {seconds}
+                        <div style={{}}>{seconds}</div>
                         <span>seconds</span>
                     </div>
                 )}
@@ -90,30 +90,30 @@ class Countdown extends React.Component {
                     <div>The event is currently underway</div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="column countdown-item" style={{textAlign:'center',backgroundColor:'teal'}}>
+                    <div className="column countdown-item" style={{}}>
                         <SVGCircle radius={daysRadius} />
-                        {days}
+                        {days}<br />
                         <span>days</span>
                     </div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="column countdown-item" style={{textAlign:'center',backgroundColor:'yellow'}}>
+                    <div className="column countdown-item" style={{}}>
                         <SVGCircle radius={hoursRadius} />
-                        {hours}
+                        {hours}<br />
                         <span>hours</span>
                     </div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="column countdown-item" style={{textAlign:'center',backgroundColor:'orange'}}>
+                    <div className="column countdown-item" style={{}}>
                         <SVGCircle radius={minutesRadius} />
-                        {minutes}
+                        {minutes}<br />
                         <span>minutes</span>
                     </div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="column countdown-item" style={{textAlign:'center',backgroundColor:'blue'}}>
+                    <div className="column countdown-item" style={{}}>
                         <SVGCircle radius={secondsRadius} />
-                        {seconds}
+                        {seconds}<br />
                         <span>seconds</span>
                     </div>
                 )}
