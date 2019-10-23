@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Moment from 'react-moment';
 import mom from 'moment';
 import 'moment-timezone';
 
@@ -14,10 +13,14 @@ class Countdown extends React.Component {
     };
 
     componentDidMount() {
+
         this.interval = setInterval(() => {
             const { timeTillDate, timeFormat, timezone} = this.props;
             console.log('HAPPENS VVV');
+            console.log(mom.tz.zone('US/Eastern'));
+            console.log(timezone);
             const then = mom.tz(timeTillDate, timeFormat, timezone)
+            console.log(then);
             console.log('HAPPENS ^^^');
 
             then.utc();
@@ -36,6 +39,7 @@ class Countdown extends React.Component {
 
             this.setState({ days, hours, minutes, seconds });
         }, 1000);
+
     }
 
     componentWillUnmount() {
@@ -90,30 +94,30 @@ class Countdown extends React.Component {
                     <div>The event is currently underway</div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="column countdown-item" style={{}}>
+                    <div className="countdown-item" style={{}}>
                         <SVGCircle radius={daysRadius} />
-                        {days}<br />
+                        <div style={{}}>{days}</div>
                         <span>days</span>
                     </div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="column countdown-item" style={{}}>
+                    <div className="countdown-item" style={{}}>
                         <SVGCircle radius={hoursRadius} />
-                        {hours}<br />
+                        <div style={{}}>{hours}</div>
                         <span>hours</span>
                     </div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="column countdown-item" style={{}}>
+                    <div className="countdown-item" style={{}}>
                         <SVGCircle radius={minutesRadius} />
-                        {minutes}<br />
+                        <div style={{}}>{minutes}</div>
                         <span>minutes</span>
                     </div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="column countdown-item" style={{}}>
+                    <div className="countdown-item" style={{}}>
                         <SVGCircle radius={secondsRadius} />
-                        {seconds}<br />
+                        <div style={{}}>{seconds}</div>
                         <span>seconds</span>
                     </div>
                 )}

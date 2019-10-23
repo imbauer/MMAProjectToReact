@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Moment from 'react-moment';
 import mom from 'moment';
 import 'moment-timezone';
 import EventFilter from './EventFilter';
@@ -43,6 +42,7 @@ class App extends Component {
 
 
     initTimezone() {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         this.setState({value: 'US/Eastern'});
     }
 
@@ -159,6 +159,7 @@ class App extends Component {
 
     componentDidMount() {
         this.callUpcomingUFC();
+        this.initTimezone();
     }
 
     render() {
@@ -183,8 +184,8 @@ class App extends Component {
                                     <div className="seperator">
                                         <div className="containerCheckBoxes verticalAlign">
                                             <ul className="ks-cboxtags" style={{fontSize:1.5+'em'}}>
-                                                <li><input type="checkbox" name="ufc" id="checkboxOne" checked={this.state.ufc} onChange={this.onCheckChange} /><label for="checkboxOne">UFC</label></li>
-                                                <li><input type="checkbox" name="bellator" id="checkboxTwo" checked={this.state.bellator} onChange={this.onCheckChange} /><label for="checkboxTwo">Bellator</label></li>
+                                                <li><input type="checkbox" name="ufc" id="checkboxOne" checked={this.state.ufc} onChange={this.onCheckChange} /><label htmlFor="checkboxOne">UFC</label></li>
+                                                <li><input type="checkbox" name="bellator" id="checkboxTwo" checked={this.state.bellator} onChange={this.onCheckChange} /><label htmlFor="checkboxTwo">Bellator</label></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -296,7 +297,7 @@ class App extends Component {
                                     <div className="seperator">
                                         <form className="verticalAlign">
                                             <div className="radio-group">
-                                                <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" /><label className="timeLabel" for="when-one">UPCOMING</label><input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} /><label className="timeLabel" for="when-two">PAST</label>
+                                                <input type="radio" id="when-one" checked={this.state.radio1 === "upcoming"} onChange={this.onRadioChange} name="radio1" value="upcoming" /><label className="timeLabel" htmlFor="when-one">UPCOMING</label><input type="radio" id="when-two" name="radio1" value="past" checked={this.state.radio1 === "past"} onChange={this.onRadioChange} /><label className="timeLabel" htmlFor="when-two">PAST</label>
                                             </div>
                                         </form>
                                     </div>
