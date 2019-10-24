@@ -12,11 +12,10 @@ class Event extends Component {
         this.changeTimezone = this.changeTimezone.bind(this);
         this.changeHiddenDiv = this.changeHiddenDiv.bind(this);
         this.state = {
-            timeObject: props.result.when.weekDay.substring(0, 3) + ' ' + props.result.when.monthString.substring(0, 3) + ' ' + props.result.when.day  + ' ' +
-            props.result.when.year + ' ' + props.result.when.hour + ':' + props.result.when.minute + ':00 ' + ' ' + props.result.when.offset,
-            selectValue: props.selectValue,
-            countDown: props.result.when.day,
-            hidden: true
+            result: undefined,
+            timeObject: undefined,
+            selectValue: undefined,
+            hidden: undefined
         };
     }
 
@@ -41,35 +40,47 @@ class Event extends Component {
         this.setState({ hidden: !this.state.hidden });
     }
 
+
+
+    componentDidMount() {
+        const timeObject = this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+        ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset;
+        const selectValue = this.props.selectValue;
+        this.setState({ selectValue: selectValue },
+        function() {
+            this.changeTimezone();
+        });
+        this.setState({ timeObject: timeObject},
+        function() {
+            this.changeTimezone();
+        });
+        this.setState({ hidden: true });
+    }
+
+
     componentDidUpdate(oldProps) {
-        const newProps = this.props
-        console.log('OOOOOOOOOOOOOOO PROPS OOOOOOOOOOOOOOO  ');
-        console.log(oldProps);
-        console.log(newProps);
-        if (oldProps.selectValue !== newProps.selectValue) {
-            this.setState({ selectValue: newProps.selectValue },
+        const timeObject = this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+        ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset;
+        const selectValue = this.props.selectValue;
+        const result = this.props.result;
+
+
+        if (oldProps.selectValue !== selectValue) {
+            this.setState({ selectValue: selectValue },
             function() {
                 this.changeTimezone();
             });
         }
-        if(oldProps.result.when.monthString !== newProps.result.when.monthString || oldProps.result.when.hour !== newProps.result.when.hour || oldProps.result.when.year !== newProps.result.when.year || oldProps.result.when.day !== newProps.result.when.day) {
-            this.setState({ timeObject: newProps.result.when.weekDay.substring(0, 3) + ' ' + newProps.result.when.monthString.substring(0, 3) + ' ' + newProps.result.when.day +
-            ' ' + newProps.result.when.year + ' ' + newProps.result.when.hour + ':' + newProps.result.when.minute + ':00 ' + ' ' + newProps.result.when.offset},
+
+        if(oldProps.result !== result) {
+            this.setState({ timeObject: this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+            ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset},
             function() {
                 this.changeTimezone();
             });
             this.setState({ hidden: true });
-            this.setState({ countDown: newProps.result.when.day },
-            function() {
-
-                console.log(this.state.countDown);
-            });
         }
-        console.log();
-        console.log('---------------------');
-        console.log(this.state.selectValue);
-        console.log('---------------------');
-        console.log();
+
     }
 
     // componentWillUnmount() {
@@ -77,15 +88,20 @@ class Event extends Component {
     // }
 
     render() {
-        var dDate = this.state.timeObject.replace(/:00 .*/g, '');
-        var timezone = this.state.timeObject.replace(/.*:00 /g, '');
+        console.log(this.state.timeObject);
+        if (this.state.timeObject !== undefined) {
+            var dDate = this.state.timeObject.replace(/:00 .*/g, '');
+            var timezone = this.state.timeObject.replace(/.*:00 /g, '');
+        }
         return (
             <div>
                 <div className="columns height is-vcentered work__list-item is-mobile is-gapless" onClick={this.changeHiddenDiv} style={{ textAlign:'center',position: 'relative',marginTop:1+'px',marginBottom:1+'px' }}>
 
                     <div className="column height countdown-wrapper" style={{ fontSize:1.7+'em',textAlign:'center' }}>
 
-                        <Countdown timeTillDate={dDate} timeFormat="ddd MMM DD YYYY HH:mm" timezone={timezone} />
+                        {this.state.timeObject !== undefined &&
+                            <Countdown timeTillDate={dDate} timeFormat="ddd MMM DD YYYY HH:mm" timezone={timezone} />
+                        }
 
                     </div>
 

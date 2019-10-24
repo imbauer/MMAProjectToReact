@@ -5,18 +5,24 @@ import 'moment-timezone';
 
 
 class Countdown extends Component {
-    state = {
-        days: undefined,
-        hours: undefined,
-        minutes: undefined,
-        seconds: undefined
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            days: undefined,
+            hours: undefined,
+            minutes: undefined,
+            seconds: undefined
+        };
+    }
+
 
     componentDidMount() {
 
         this.interval = setInterval(() => {
             console.log('============ SET INTERVAL CALLED ==============');
-            const { timeTillDate, timeFormat, timezone} = this.props;
+            const timeTillDate = this.props.timeTillDate;
+            const timeFormat = this.props.timeFormat;
+            const timezone = this.props.timezone;
             console.log('HAPPENS VVV');
             console.log(mom.tz.zone('US/Eastern'));
             console.log(timezone);
@@ -29,16 +35,16 @@ class Countdown extends Component {
             now.utc();
             const countdown = mom(then - now)
             // const countdown = then - now;
-            const days = Math.floor(countdown / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+            const d = Math.floor(countdown / (1000 * 60 * 60 * 24));
+            const h = Math.floor((countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((countdown % (1000 * 60)) / 1000);
             // const days = countdown.format('D');
             // const hours = countdown.format('HH');
             // const minutes = countdown.format('mm');
             // const seconds = countdown.format('ss');
 
-            this.setState({ days, hours, minutes, seconds });
+            this.setState({ days: d, hours: h, minutes: m, seconds: s });
         }, 1000);
 
     }
@@ -50,7 +56,10 @@ class Countdown extends Component {
     }
 
     render() {
-        let { days, hours, minutes, seconds } = this.state;
+        let days = this.state.days;
+        let hours = this.state.hours;
+        let minutes = this.state.minutes;
+        let seconds = this.state.seconds;
 
 
 
