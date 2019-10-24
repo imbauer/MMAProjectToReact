@@ -4,7 +4,7 @@ import 'moment-timezone';
 
 
 
-class Countdown extends React.Component {
+class Countdown extends Component {
     state = {
         days: undefined,
         hours: undefined,
@@ -15,6 +15,7 @@ class Countdown extends React.Component {
     componentDidMount() {
 
         this.interval = setInterval(() => {
+            console.log('============ SET INTERVAL CALLED ==============');
             const { timeTillDate, timeFormat, timezone} = this.props;
             console.log('HAPPENS VVV');
             console.log(mom.tz.zone('US/Eastern'));
@@ -63,28 +64,28 @@ class Countdown extends React.Component {
         return (
             <div className="columns is-multiline is-mobile verticalAlign" style={{margin:0,display:'flex',justifyContent: 'space-between'}}>
                 {days >= 0 && (
-                    <div className="countdown-item" style={{backgroundColor:'teal'}}>
+                    <div className="countdown-item" style={{}}>
                         <SVGCircle radius={daysRadius} />
                         <div style={{}}>{days}</div>
                         <span>days</span>
                     </div>
                 )}
                 {hours >= 0 && (
-                    <div className="countdown-item" style={{backgroundColor:'yellow'}}>
+                    <div className="countdown-item" style={{}}>
                         <SVGCircle radius={hoursRadius} />
                         <div style={{}}>{hours}</div>
                         <span>hours</span>
                     </div>
                 )}
                 {minutes >= 0 && (
-                    <div className="countdown-item" style={{backgroundColor:'orange'}}>
+                    <div className="countdown-item" style={{}}>
                         <SVGCircle radius={minutesRadius} />
                         <div style={{}}>{minutes}</div>
                         <span>minutes</span>
                     </div>
                 )}
                 {seconds >= 0 && (
-                    <div className="countdown-item" style={{backgroundColor:'blue'}}>
+                    <div className="countdown-item" style={{}}>
                         <SVGCircle radius={secondsRadius} />
                         <div style={{}}>{seconds}</div>
                         <span>seconds</span>

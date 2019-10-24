@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 
-class Fight extends React.Component {
+class Fight extends Component {
     constructor(props) {
         super(props);
         this.state = {

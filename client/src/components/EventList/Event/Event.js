@@ -22,7 +22,9 @@ class Event extends Component {
 
 
     changeTimezone() {
+        console.log('============ CHANGE TIMEZONE CALLED ==============');
         console.log(this.state.selectValue);
+        console.log(this.state.timeObject);
         var time = mom(new Date(this.state.timeObject.split(':00 ')[0])).format('YYYY-MM-DD HH:mm');
         var offset = this.state.timeObject.split(':00 ')[1].trim();
         console.log(time);
@@ -41,6 +43,9 @@ class Event extends Component {
 
     componentDidUpdate(oldProps) {
         const newProps = this.props
+        console.log('OOOOOOOOOOOOOOO PROPS OOOOOOOOOOOOOOO  ');
+        console.log(oldProps);
+        console.log(newProps);
         if (oldProps.selectValue !== newProps.selectValue) {
             this.setState({ selectValue: newProps.selectValue },
             function() {
@@ -49,7 +54,10 @@ class Event extends Component {
         }
         if(oldProps.result.when.monthString !== newProps.result.when.monthString || oldProps.result.when.hour !== newProps.result.when.hour || oldProps.result.when.year !== newProps.result.when.year || oldProps.result.when.day !== newProps.result.when.day) {
             this.setState({ timeObject: newProps.result.when.weekDay.substring(0, 3) + ' ' + newProps.result.when.monthString.substring(0, 3) + ' ' + newProps.result.when.day +
-            ' ' + newProps.result.when.year + ' ' + newProps.result.when.hour + ':' + newProps.result.when.minute + ':00 ' + ' ' + newProps.result.when.offset});
+            ' ' + newProps.result.when.year + ' ' + newProps.result.when.hour + ':' + newProps.result.when.minute + ':00 ' + ' ' + newProps.result.when.offset},
+            function() {
+                this.changeTimezone();
+            });
             this.setState({ hidden: true });
             this.setState({ countDown: newProps.result.when.day },
             function() {
@@ -139,7 +147,7 @@ class Event extends Component {
                             <div className="verticalAlign textRotate inner countdown-item">
                                 {this.state.timeObject}
                             </div>
-                            <div className={`flag-icon-background flag-icon-${this.props.result.location.co}`} style={{ zIndex:-1,opacity:0.5,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+                            <div className={`flag-icon-background flag-icon-${this.props.result.location.co}`} style={{ zIndex:-1,opacity:0.4,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
 
                             </div>
                         </div>
