@@ -162,11 +162,13 @@ class App extends Component {
             <div className="App">
 
                 <section className="hero is-medium is-bold" style={{backgroundColor:'#282c34'}}>
+
+                <h1 className="title has-text-light big-text">
+                    A <span className="has-text-primary">Website</span> that provides the exact <span className="has-text-primary">time</span>,
+                    regardless of <span className="has-text-primary">time zone</span>, of every <span className="has-text-primary">MMA Event</span>
+                </h1>
+
                     <div className="hero-body">
-                        <h1 className="title has-text-light big-text">
-                            A <span className="has-text-primary">Website</span> that provides the exact <span className="has-text-primary">time</span>,
-                            regardless of <span className="has-text-primary">time zone</span>, of every <span className="has-text-primary">MMA Event</span>
-                        </h1>
 
                         <div className="columns height is-vcentered is-mobile is-gapless" style={{textAlign:'center',position:'relative'}}>
 
