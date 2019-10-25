@@ -107,60 +107,70 @@ class Event extends Component {
 
                     {this.props.result.promotion === "Ultimate Fighting Championship" &&
                         <div className="column height big-text is-two-fifths ufcBackground">
-                            <div className="verticalAlign">
+
                             {this.props.result.location !== undefined && this.props.result.location.name && this.props.result.location.city && this.props.result.location.provState && this.props.result.location.country &&
-                              <h2>
+                              <h2 className="mobileLocation eventElementTop">
                                 {this.props.result.location.name}, {this.props.result.location.city}, {this.props.result.location.provState}, {this.props.result.location.country}
                               </h2>
                             }
                             {this.props.result.location !== undefined && this.props.result.location.name && this.props.result.location.city && !this.props.result.location.provState && this.props.result.location.country &&
-                              <h2>
+                              <h2 className="mobileLocation eventElementTop">
                                 {this.props.result.location.name}, {this.props.result.location.city}, {this.props.result.location.country}
                               </h2>
                             }
                             {this.props.result.location === undefined &&
-                              <h2>
+                              <h2 className="mobileLocation eventElementTop">
                                 NO LOCATION
                               </h2>
                             }
-
-                            <h1 className="eventTitle" style={{ marginBottom:5+'%',marginTop:5+'%' }}>
-                                    {this.props.result.event}
-                            </h1>
-                            <div>{this.props.result.title}</div>
+                            <div className="verticalAlign" style={{}}>
+                                <h1 className="eventTitle">
+                                    {(this.props.result.event === this.props.result.otherName || this.props.result.otherName === undefined) &&
+                                        <div>{this.props.result.name}</div>
+                                    }
+                                    {(this.props.result.event !== this.props.result.otherName && this.props.result.otherName !== undefined) &&
+                                        <div>{this.props.result.otherName}</div>
+                                    }
+                                </h1>
                             </div>
+                            <div style={{position:'absolute',bottom:5+'%',left: 0,right: 0,marginLeft: 'auto',marginRight: 'auto'}}>{this.props.result.title}</div>
                         </div>
                     }
                     {this.props.result.promotion === "Bellator" &&
                         <div className="column height big-text is-two-fifths bellatorBackground">
-                            <div className="verticalAlign">
+
                             {this.props.result.location !== undefined && this.props.result.location.name && this.props.result.location.city && this.props.result.location.provState && this.props.result.location.country &&
-                              <h2>
+                              <h2 className="mobileLocation eventElementTop">
                                 {this.props.result.location.name}, {this.props.result.location.city}, {this.props.result.location.provState}, {this.props.result.location.country}
                               </h2>
                             }
                             {this.props.result.location !== undefined && this.props.result.location.name && this.props.result.location.city && !this.props.result.location.provState && this.props.result.location.country &&
-                              <h2>
+                              <h2 className="mobileLocation eventElementTop">
                                 {this.props.result.location.name}, {this.props.result.location.city}, {this.props.result.location.country}
                               </h2>
                             }
                             {this.props.result.location === undefined &&
-                              <h2>
+                              <h2 className="mobileLocation eventElementTop">
                                 NO LOCATION
                               </h2>
                             }
-
-                            <h1 className="eventTitle" style={{ marginBottom:5+'%',marginTop:5+'%' }}>
-                                    {this.props.result.event}
-                            </h1>
-                            <div>{this.props.result.title}</div>
+                            <div className="verticalAlign" style={{}}>
+                                <h1 className="eventTitle">
+                                    {(this.props.result.event === this.props.result.otherName || this.props.result.otherName === undefined) &&
+                                        <div>{this.props.result.name}</div>
+                                    }
+                                    {(this.props.result.event !== this.props.result.otherName && this.props.result.otherName !== undefined) &&
+                                        <div>{this.props.result.otherName}</div>
+                                    }
+                                </h1>
                             </div>
+                            <div style={{position:'absolute',bottom:5+'%',left: 0,right: 0,marginLeft: 'auto',marginRight: 'auto'}}>{this.props.result.title}</div>
                         </div>
                     }
 
                     {this.props.result.location !== undefined &&
                         <div className="column height">
-                            <div className="verticalAlign textRotate inner countdown-item">
+                            <div className="verticalAlign textRotate inner">
                                 {this.state.timeObject}
                             </div>
                             <div className={`flag-icon-background flag-icon-${this.props.result.location.co}`} style={{ zIndex:-1,opacity:0.4,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
