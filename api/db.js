@@ -316,7 +316,26 @@ module.exports = {
 
     },
 
+    getFighter: function(fighter) {
+        return new Promise((resolve, reject) => {
 
+            Fighters.findOne({ "name" : fighter }, function(err, fighter) {
+
+                if (err) {
+                  return err;
+                }
+
+
+
+                console.log('------------------------- Found Specific Fighter -------------------------');
+                console.log(fighter);
+                console.log('--------------------------------------------------------------------------');
+                return resolve(fighter);
+
+            });
+
+        })
+    },
 
     addFighter: function(fighter) {
         if (fighter !== undefined) {

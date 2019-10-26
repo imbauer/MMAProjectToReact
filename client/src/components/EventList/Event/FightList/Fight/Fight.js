@@ -9,6 +9,8 @@ class Fight extends Component {
         };
     }
 
+    
+
     render() {
 
         return (

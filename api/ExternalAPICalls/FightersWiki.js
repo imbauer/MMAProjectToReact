@@ -13,6 +13,7 @@ router.get('/fighter/data/:fighterName', function(req, res, next) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
+            fighterName = fighterName.replace(/\s\(.*/g, '');
             var fighter = processFighters.processFighter(body, fighterName);
             res.send(fighter);
             return fighter;
@@ -20,108 +21,5 @@ router.get('/fighter/data/:fighterName', function(req, res, next) {
     });
 
 });
-
-
-
-function getFighterWikiData(fighter) {
-
-    return new Promise((resolve, reject) => {
-
-        var URI = encodeURIComponent(fighter).replace(/%2520/g, '%20').replace(/%252B/g, '%2B');
-        var url = 'http://192.168.99.100:9000/fightersWiki/fighter/data/' + URI;
-        request(url, function (err, response, body) {
-            if(err){
-                console.log(err + ' ERR: Stopped at ---> ' + url);
-            } else {
-                if (body === 'Error') {
-                    console.log('Yup, now youre gonna have to call the other possibilities');
-                    url = url + ' (fighter)';
-                    request(url, function (err, response, body) {
-                        if(err){
-                            console.log(err + ' ERR: Stopped at ---> ' + url);
-                        } else {
-                            if (body === 'Error') {
-                                url = url.replace(/(\s\(.*)|(%20\(.*)/g, '') + ' (MMA)';
-                                console.log('Yup, now youre gonna have to call the other possibilities (fighter layer)');
-                                request(url, function (err, response, body) {
-                                    if(err){
-                                        console.log(err + ' ERR: Stopped at ---> ' + url);
-                                    } else {
-                                        if (body === 'Error') {
-                                            url = url.replace(/(\s\(.*)|(%20\(.*)/g, '') + ' (grappler)';
-                                            console.log('Yup, now youre gonna have to call the other possibilities (MMA layer)');
-                                            request(url, function (err, response, body) {
-                                                if(err){
-                                                    console.log(err + ' ERR: Stopped at ---> ' + url);
-                                                } else {
-                                                    if (body === 'Error') {
-                                                        url = url.replace(/(\s\(.*)|(%20\(.*)/g, '') + ' (wrestler)';
-                                                        console.log('Yup, now youre gonna have to call the other possibilities (wrestler layer)');
-                                                        request(url, function (err, response, body) {
-                                                            if(err){
-                                                                console.log(err + ' ERR: Stopped at ---> ' + url);
-                                                            } else {
-                                                                if (body === 'Error') {
-                                                                    url = url.replace(/(\s\(.*)|(%20\(.*)/g, '') + ' (kickboxer)';
-                                                                    console.log('Yup, now youre gonna have to call the other possibilities (kickboxer layer)');
-                                                                    request(url, function (err, response, body) {
-                                                                        if(err){
-                                                                            console.log(err + ' ERR: Stopped at ---> ' + url);
-                                                                        } else {
-                                                                            if (body === 'Error') {
-                                                                                console.log('This guy is a can and doesnt have a WIKIPEDIA page');
-                                                                                return resolve();
-                                                                            }
-                                                                            else {
-                                                                                var data = JSON.parse(body);
-                                                                                return resolve(data);
-                                                                                // mongodb.addFighter(data);
-                                                                            }
-                                                                        }
-                                                                    });
-                                                                }
-                                                                else {
-                                                                    var data = JSON.parse(body);
-                                                                    return resolve(data);
-                                                                    // mongodb.addFighter(data);
-                                                                }
-                                                            }
-                                                        });
-                                                    }
-                                                    else {
-                                                        var data = JSON.parse(body);
-                                                        return resolve(data);
-                                                        // mongodb.addFighter(data);
-                                                    }
-                                                }
-                                            });
-                                        }
-                                        else {
-                                            var data = JSON.parse(body);
-                                            return resolve(data);
-                                            // mongodb.addFighter(data);
-                                        }
-                                    }
-                                });
-                            }
-                            else {
-                                var data = JSON.parse(body);
-                                return resolve(data);
-                                // mongodb.addFighter(data);
-                            }
-                        }
-                    });
-                }
-                else {
-                    var data = JSON.parse(body);
-                    return resolve(data);
-                    // mongodb.addFighter(data);
-                }
-            }
-        });
-
-    });
-
-}
 
 module.exports = router;

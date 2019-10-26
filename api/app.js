@@ -42,6 +42,57 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+function removeUpcomingEvents() {
+    return new Promise(resolve => {
+      mongodb.clearData();
+      console.log("ClearData Section");
+      resolve();
+    }).catch( function(err) {
+        console.log(err);
+    });
+}
+
+function reAddUpcomingUFCEvents() {
+    return new Promise(resolve => {
+        var url = 'http://192.168.99.100/promotions/ufc/event/UFC%20240';
+        request(url, function (err, response, body) {
+            if(err){
+                console.log(err + ' ERR: Stopped at ---> ' + url);
+            } else {
+                console.log('Called UFC successfully');
+            }
+        });
+        console.log("Add UFC Data Section");
+        resolve();
+    }).catch( function(err) {
+        console.log(err);
+    });
+}
+
+function reAddUpcomingBellatorEvents() {
+    return new Promise(resolve => {
+        var url = 'http://192.168.99.100/promotions/bellator/event/Bellator_MMA_in_2019';
+        request(url, function (err, response, body) {
+            if(err){
+                console.log(err + ' ERR: Stopped at ---> ' + url);
+            } else {
+                console.log('Called Bellator successfully');
+            }
+        });
+        console.log("Add Bellator Data Section");
+        resolve();
+    }).catch( function(err) {
+        console.log(err);
+    });
+}
+
+// cron.schedule('0 * * * *', () => {
+//     removeUpcomingEvents().then(() => reAddUpcomingUFCEvents()).then(() => reAddUpcomingBellatorEvents());
+//     console.log('==============================================================');
+//     console.log('Runs at the number in the hour');
+//     console.log('==============================================================');
+// });
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
