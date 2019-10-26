@@ -33,6 +33,7 @@ router.get('/fighter/:fighterName', function(req, res) {
         })
         .catch(err => {
             console.log(err);
+            res.send({results: 'N/A'});
         })
 });
 
@@ -64,7 +65,7 @@ function getNextFighter(fighters, fighter) {
             console.log('-------------------------------------------------------------------------------');
             // console.log(fighters.indexOf(fighter));
             // console.log(fighters[fighters.indexOf(fighter) + 1]);
-            if ((fighters.indexOf(fighter) + 1 !== -1 || fighters.indexOf(fighter) + 1 !== 0) && fighters.indexOf(fighter) < 30) {
+            if ((fighters.indexOf(fighter) + 1 !== -1 || fighters.indexOf(fighter) + 1 !== 0) && fighters.indexOf(fighter) < 400) {
                 getNextFighter(fighters, fighters[fighters.indexOf(fighter) + 1]);
             }
         })

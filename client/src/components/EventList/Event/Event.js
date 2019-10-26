@@ -21,18 +21,10 @@ class Event extends Component {
 
 
     changeTimezone() {
-        console.log('============ CHANGE TIMEZONE CALLED ==============');
-        console.log(this.state.selectValue);
-        console.log(this.state.timeObject);
         var time = mom(new Date(this.state.timeObject.split(':00 ')[0])).format('YYYY-MM-DD HH:mm');
         var offset = this.state.timeObject.split(':00 ')[1].trim();
-        console.log(time);
-        console.log(offset);
         var currentTime = mom.tz(time.toString(), offset);
         var differentTime = currentTime.clone().tz(this.state.selectValue);
-        console.log(currentTime);
-        console.log(differentTime);
-        console.log('New Region: ' + this.state.selectValue);
         this.setState({ timeObject: differentTime.toString().replace(/GMT.*/g, this.state.selectValue) })
     }
 
@@ -88,7 +80,6 @@ class Event extends Component {
     // }
 
     render() {
-        console.log(this.state.timeObject);
         if (this.state.timeObject !== undefined) {
             var dDate = this.state.timeObject.replace(/:00 .*/g, '');
             var timezone = this.state.timeObject.replace(/.*:00 /g, '');

@@ -19,16 +19,10 @@ class Countdown extends Component {
     componentDidMount() {
 
         this.interval = setInterval(() => {
-            console.log('============ SET INTERVAL CALLED ==============');
             const timeTillDate = this.props.timeTillDate;
             const timeFormat = this.props.timeFormat;
             const timezone = this.props.timezone;
-            console.log('HAPPENS VVV');
-            console.log(mom.tz.zone('US/Eastern'));
-            console.log(timezone);
             const then = mom.tz(timeTillDate, timeFormat, timezone)
-            console.log(then);
-            console.log('HAPPENS ^^^');
 
             then.utc();
             const now = mom().tz(timezone)
