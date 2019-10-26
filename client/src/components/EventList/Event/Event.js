@@ -133,7 +133,7 @@ class Event extends Component {
                                     }
                                 </h1>
                             </div>
-                            <div style={{position:'absolute',bottom:5+'%',left: 0,right: 0,marginLeft: 'auto',marginRight: 'auto'}}>{this.props.result.title}</div>
+                            <div className="eventElementBottom">{this.props.result.title}</div>
                         </div>
                     }
                     {this.props.result.promotion === "Bellator" &&
@@ -164,7 +164,7 @@ class Event extends Component {
                                     }
                                 </h1>
                             </div>
-                            <div style={{position:'absolute',bottom:5+'%',left: 0,right: 0,marginLeft: 'auto',marginRight: 'auto'}}>{this.props.result.title}</div>
+                            <div className="eventElementBottom">{this.props.result.title}</div>
                         </div>
                     }
 

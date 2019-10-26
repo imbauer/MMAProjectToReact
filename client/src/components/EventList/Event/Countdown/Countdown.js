@@ -89,7 +89,7 @@ class Countdown extends Component {
                     </div>
                 )}
                 {minutes >= 0 && (
-                    <div className="countdown-item">
+                    <div className="countdown-item mobileLocation">
                         <SVGCircle radius={minutesRadius} />
                         <SVGCircleSmall radius={minutesRadius} />
                         <div>{minutes}</div>
@@ -97,7 +97,7 @@ class Countdown extends Component {
                     </div>
                 )}
                 {seconds >= 0 && (
-                    <div className="countdown-item">
+                    <div className="countdown-item mobileLocation">
                         <SVGCircle radius={secondsRadius} />
                         <SVGCircleSmall radius={secondsRadius} />
                         <div>{seconds}</div>
@@ -124,7 +124,7 @@ class Countdown extends Component {
                     </div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="countdown-item">
+                    <div className="countdown-item mobileLocation">
                         <SVGCircle radius={minutesRadius} />
                         <SVGCircleSmall radius={minutesRadius} />
                         <div>{minutes}</div>
@@ -132,7 +132,7 @@ class Countdown extends Component {
                     </div>
                 )}
                 {(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) && (-2 >= hours) && (
-                    <div className="countdown-item">
+                    <div className="countdown-item mobileLocation">
                         <SVGCircle radius={secondsRadius} />
                         <SVGCircleSmall radius={secondsRadius} />
                         <div>{seconds}</div>

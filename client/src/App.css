@@ -38,12 +38,14 @@
     transform: translate(0, -50%);
 }
 
-
+.columns.is-gapless:not(:last-child) {
+    margin-bottom: 0rem;
+}
 
 .containerCheckBoxes {
     max-width: 640px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 13px;
+    font-size: 1.4em;
 }
 
 ul.ks-cboxtags {
@@ -55,10 +57,10 @@ ul.ks-cboxtags li{
 }
 ul.ks-cboxtags li label{
     display: inline-block;
-    background-color: rgba(255, 255, 255, .9);
-    border: 2px solid rgba(139, 139, 139, .3);
-    color: #adadad;
-    border-radius: 25px;
+    background-color: #282c34;
+    border: 3px solid #D63C3F;
+    color: white;
+    border-radius: 100px;
     white-space: nowrap;
     margin: 3px 0px;
     -webkit-touch-callout: none;
@@ -81,7 +83,7 @@ ul.ks-cboxtags li label::before {
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Work Sans';
     font-weight: 900;
     /* font-size: 12px; */
     padding: 2px 6px 2px 2px;
@@ -96,7 +98,7 @@ ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
 }
 
 ul.ks-cboxtags li input[type="checkbox"]:checked + label {
-    border: 2px solid #1bdbf8;
+    border: 3px solid #D63C3F;
     background-color: #D63C3F;
     color: #fff;
     transition: all .2s;
@@ -110,7 +112,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
   opacity: 0;
 }
 ul.ks-cboxtags li input[type="checkbox"]:focus + label {
-  border: 2px solid #e9a1ff;
+  border: 3px solid #D63C3F;
 }
 
 .imageSize {
@@ -370,19 +372,21 @@ label.timeLabel  {
   font-weight: bold;
   font-size:2em;
   padding: 5px 20px;
+  width:100%;
 }
 input[type=radio]:checked + label {
   color: #ccc8ce;
   background: #D63C3F;
 }
 label + input[type=radio] + label {
-  border-left: solid 3px #D63C3F;
+  /* border-top: solid 3px #D63C3F; */
 }
 .radio-group {
   border: solid 3px #D63C3F;
   display: inline-block;
   margin: 20px;
   border-radius: 10px;
+  width:50%;
 }
 
 .verticalAlign {
@@ -399,7 +403,7 @@ label + input[type=radio] + label {
   height: 100%;
   width:100%;
   font-size: 16px;
-  border:1px solid black;
+  border:1px solid #D63C3F;
   border-radius: 25px;
   /* color:white; */
   transition: background 0.4s;
@@ -551,7 +555,7 @@ label + input[type=radio] + label {
 }
 .eventElementBottom {
     position:absolute;
-    top:5%;
+    bottom:5%;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -560,14 +564,23 @@ label + input[type=radio] + label {
 
 @media (max-width: 320px) {
   body { background-color: red; }
+  .mobileLocation {
+      display:none;
+  }
 }
 
 @media (min-width: 321px ) and (max-width: 375px) {
   body { background-color: blue; }
+  .mobileLocation {
+      display:none;
+  }
 }
 
 @media (min-width: 376px ) and (max-width: 425px) {
   body { background-color: orange; }
+  .mobileLocation {
+      display:none;
+  }
 }
 
 
@@ -592,10 +605,7 @@ label + input[type=radio] + label {
       height:600px;
   }
   .seperator {
-      height:100px;
-  }
-  .map {
-      height:100px;
+      height:150px;
   }
   .eventTitle {
       font-size:1.5em;
@@ -658,9 +668,60 @@ label + input[type=radio] + label {
   .bellatorBackground {
       background-size:60%;
   }
+  .eventElementBottom {
+      font-size:1.2em;
+      font-weight:400;
+  }
+  label.timeLabel  {
+    font-size:1.4em;
+    padding: 2px 7px;
+  }
+  .radio-group {
+    margin: 7px;
+    border-radius: 3px;
+    width:65%;
+  }
+
+  .styled select {
+    background-size:90%;
+  }
 
 }
 
 @media (min-width: 769px ) and (max-width: 1024px) {
   body { background-color: pink; }
+  .mobileLocation {
+      display:none;
+  }
+  label.timeLabel  {
+    font-size:1.2em;
+  }
+  .radio-group {
+    width:65%;
+  }
+}
+
+@media (min-width: 1025px ) and (max-width: 1324px) {
+    label.timeLabel  {
+      font-size:1.4em;
+    }
+    .radio-group {
+      width:65%;
+    }
+    .styled select {
+      background-size:75%;
+    }
+    .countdown-svg {
+      display:none;
+    }
+    .countdown-svgSmall {
+      display:inline;
+    }
+    .countdown-item {
+      font-size: 30px;
+      line-height: 25px;
+      padding-top: 10px;
+      width: 70px;
+      height: 70px;
+    }
 }
