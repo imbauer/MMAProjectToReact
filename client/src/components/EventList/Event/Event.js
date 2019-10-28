@@ -115,7 +115,7 @@ class Event extends Component {
                     }
                     {this.props.result.location === undefined &&
                         <div className="column height clockDiv" style={{ fontSize:1.7+'em',textAlign:'center' }}>
-                            Place Holder
+                            PlaceHolder
                         </div>
                     }
 
