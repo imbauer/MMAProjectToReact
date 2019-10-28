@@ -7,13 +7,10 @@ var request = require('request');
 var logger = require('morgan');
 var cors = require("cors");
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var promotions = require('./routes/Promotions');
 var fighters = require('./routes/Fighters');
-var testAPIRouter = require("./routes/testAPI");
 var fightersWiki = require("./ExternalAPICalls/FightersWiki");
 var promotionsWiki = require("./ExternalAPICalls/PromotionsWiki");
-// var testDBRouter = require("./routes/testDB");
 var mongodb = require('./db');
 
 var app = express();
@@ -32,13 +29,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongodb.connectDB();
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use("/testAPI", testAPIRouter);
 app.use("/promotions", promotions);
 app.use("/fighters", fighters);
 app.use("/fightersWiki", fightersWiki);
 app.use("/promotionsWiki", promotionsWiki);
-// app.use("/testDB", testDBRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

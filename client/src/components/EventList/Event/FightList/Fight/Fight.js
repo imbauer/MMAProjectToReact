@@ -82,7 +82,7 @@ class Fight extends Component {
                             </div>
                         </div>
                         <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                            {record1}
+                            &nbsp;{record1}&nbsp;
                         </div>
                         <div className="column is-4 big-text" style={{backgroundColor:'gray'}}>
                             <h1 className="" style={{fontSize:1+'em',color:'black',fontWeight:200}}>
@@ -90,7 +90,7 @@ class Fight extends Component {
                             </h1>
                         </div>
                         <div className="column is-1 big-text fightFont" style={{color:'black',fontFamily:'Nunito'}}>
-                            {record2}
+                            &nbsp;{record2}&nbsp;
                         </div>
                         <div className="column is-2 big-text fightFont" style={{color:'black',fontFamily:'Nunito',position:'relative'}}>
                             {this.state.fight[3].split(" ", 2)[0]} <br />
@@ -121,7 +121,7 @@ class Fight extends Component {
                     }
                     {(this.state.fight[2] === 2 || this.state.fight[2] === "2") &&
                         <div className="column is-1 fightFont" style={{backgroundColor:'#FF0000',color:'black',fontFamily: 'Work Sans'}}>
-                            {record1}
+                            &nbsp;{record1}&nbsp;
                         </div>
                     }
                     {(this.state.fight[4].includes('Draw') || this.state.fight[4].includes('No Contest') || this.state.fight[4].includes('NC')) &&
@@ -135,7 +135,7 @@ class Fight extends Component {
                     }
                     {(this.state.fight[4].includes('Draw') || this.state.fight[4].includes('No Contest') || this.state.fight[4].includes('NC')) &&
                         <div className="column is-1 fightFont" style={{backgroundColor:'#D3D3D3',color:'black',fontFamily: 'Work Sans'}}>
-                            {record1}
+                            &nbsp;{record1}&nbsp;
                         </div>
                     }
                     {(this.state.fight[2].includes("def")) &&
@@ -149,7 +149,7 @@ class Fight extends Component {
                     }
                     {(this.state.fight[2].includes("def")) &&
                         <div className="column is-1 fightFont" style={{backgroundColor:'#00FA96',color:'black',fontFamily: 'Work Sans'}}>
-                            {record1}
+                            &nbsp;{record1}&nbsp;
                         </div>
                     }
 
@@ -164,7 +164,7 @@ class Fight extends Component {
                     </div>
                         {(this.state.fight[2] === 2 || this.state.fight[2] === "2") &&
                             <div className="column is-1 fightFont" style={{backgroundColor:'#00FA96',color:'black',fontFamily: 'Work Sans'}}>
-                                {record2}
+                                &nbsp;{record2}&nbsp;
                             </div>
                         }
                         {(this.state.fight[2] === 2 || this.state.fight[2] === "2") &&
@@ -178,7 +178,7 @@ class Fight extends Component {
                         }
                         {(this.state.fight[4].includes('Draw') || this.state.fight[4].includes('No Contest') || this.state.fight[4].includes('NC')) &&
                             <div className="column is-1 fightFont" style={{backgroundColor:'#D3D3D3',color:'black',fontFamily: 'Work Sans'}}>
-                                {record2} {nationality2}
+                                &nbsp;{record2}&nbsp;
                             </div>
                         }
                         {(this.state.fight[4].includes('Draw') || this.state.fight[4].includes('No Contest') || this.state.fight[4].includes('NC')) &&
@@ -192,7 +192,7 @@ class Fight extends Component {
                         }
                         {(this.state.fight[2].includes("def")) &&
                             <div className="column is-1 fightFont" style={{backgroundColor:'#FF0000',color:'black',fontFamily: 'Work Sans'}}>
-                                {record2}
+                                &nbsp;{record2}&nbsp;
                             </div>
                         }
                         {(this.state.fight[2].includes("def")) &&

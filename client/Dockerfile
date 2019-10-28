@@ -1,6 +1,6 @@
 
 # Use a lighter version of Node as a parent image
-FROM mhart/alpine-node:8.11.4
+FROM node:10-alpine
 
 # Set the working directory to /client
 WORKDIR /client

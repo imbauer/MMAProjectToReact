@@ -4,6 +4,8 @@ import 'moment-timezone';
 
 import Countdown from './Countdown/Countdown'
 import FightList from './FightList/FightList'
+import Ufc from './Promotion/Ufc'
+import Bellator from './Promotion/Bellator'
 
 
 class Event extends Component {
@@ -13,7 +15,7 @@ class Event extends Component {
         this.changeHiddenDiv = this.changeHiddenDiv.bind(this);
         this.state = {
             result: undefined,
-            timeObject: undefined,
+            eventDate: undefined,
             selectValue: undefined,
             hidden: undefined
         };
@@ -21,11 +23,11 @@ class Event extends Component {
 
 
     changeTimezone() {
-        var time = mom(new Date(this.state.timeObject.split(':00 ')[0])).format('YYYY-MM-DD HH:mm');
-        var offset = this.state.timeObject.split(':00 ')[1].trim();
+        var time = mom(new Date(this.state.eventDate.split(':00 ')[0])).format('YYYY-MM-DD HH:mm');
+        var offset = this.state.eventDate.split(':00 ')[1].trim();
         var currentTime = mom.tz(time.toString(), offset);
         var differentTime = currentTime.clone().tz(this.state.selectValue);
-        this.setState({ timeObject: differentTime.toString().replace(/GMT.*/g, this.state.selectValue) })
+        this.setState({ eventDate: differentTime.toString().replace(/GMT.*/g, this.state.selectValue) })
     }
 
     changeHiddenDiv() {
@@ -35,14 +37,14 @@ class Event extends Component {
 
 
     componentDidMount() {
-        const timeObject = this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+        const eventDate = this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
         ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset;
         const selectValue = this.props.selectValue;
         this.setState({ selectValue: selectValue },
         function() {
             this.changeTimezone();
         });
-        this.setState({ timeObject: timeObject},
+        this.setState({ eventDate: eventDate},
         function() {
             this.changeTimezone();
         });
@@ -51,7 +53,7 @@ class Event extends Component {
 
 
     componentDidUpdate(oldProps) {
-        const timeObject = this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+        const eventDate = this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
         ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset;
         const selectValue = this.props.selectValue;
         const result = this.props.result;
@@ -65,7 +67,7 @@ class Event extends Component {
         }
 
         if(oldProps.result !== result) {
-            this.setState({ timeObject: this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
+            this.setState({ eventDate: this.props.result.when.weekDay.substring(0, 3) + ' ' + this.props.result.when.monthString.substring(0, 3) + ' ' + this.props.result.when.day +
             ' ' + this.props.result.when.year + ' ' + this.props.result.when.hour + ':' + this.props.result.when.minute + ':00 ' + ' ' + this.props.result.when.offset},
             function() {
                 this.changeTimezone();
@@ -80,89 +82,31 @@ class Event extends Component {
     // }
 
     render() {
-        if (this.state.timeObject !== undefined) {
-            var dDate = this.state.timeObject.replace(/:00 .*/g, '');
-            var timezone = this.state.timeObject.replace(/.*:00 /g, '');
+        if (this.state.eventDate !== undefined) {
+            var dDate = this.state.eventDate.replace(/:00 .*/g, '');
+            var timezone = this.state.eventDate.replace(/.*:00 /g, '');
         }
         return (
             <div>
                 <div className="columns height is-vcentered work__list-item is-mobile is-gapless" onClick={this.changeHiddenDiv} style={{ textAlign:'center',position: 'relative',marginTop:1+'px',marginBottom:1+'px' }}>
 
                     <div className="column height countdown-wrapper" style={{ fontSize:1.7+'em',textAlign:'center' }}>
-
-                        {this.state.timeObject !== undefined &&
+                        {this.state.eventDate !== undefined &&
                             <Countdown timeTillDate={dDate} timeFormat="ddd MMM DD YYYY HH:mm" timezone={timezone} />
                         }
-
                     </div>
 
                     {this.props.result.promotion === "Ultimate Fighting Championship" &&
-                        <div className="column height big-text is-two-fifths ufcBackground">
-
-                            {this.props.result.location !== undefined && this.props.result.location.name && this.props.result.location.city && this.props.result.location.provState && this.props.result.location.country &&
-                              <h2 className="mobileLocation eventElementTop">
-                                {this.props.result.location.name}, {this.props.result.location.city}, {this.props.result.location.provState}, {this.props.result.location.country}
-                              </h2>
-                            }
-                            {this.props.result.location !== undefined && this.props.result.location.name && this.props.result.location.city && !this.props.result.location.provState && this.props.result.location.country &&
-                              <h2 className="mobileLocation eventElementTop">
-                                {this.props.result.location.name}, {this.props.result.location.city}, {this.props.result.location.country}
-                              </h2>
-                            }
-                            {this.props.result.location === undefined &&
-                              <h2 className="mobileLocation eventElementTop">
-                                NO LOCATION
-                              </h2>
-                            }
-                            <div className="verticalAlign" style={{}}>
-                                <h1 className="eventTitle">
-                                    {(this.props.result.event === this.props.result.otherName || this.props.result.otherName === undefined) &&
-                                        <div>{this.props.result.name}</div>
-                                    }
-                                    {(this.props.result.event !== this.props.result.otherName && this.props.result.otherName !== undefined) &&
-                                        <div>{this.props.result.otherName}</div>
-                                    }
-                                </h1>
-                            </div>
-                            <div className="eventElementBottom">{this.props.result.title}</div>
-                        </div>
+                        <Ufc eventDetails={this.props.result} />
                     }
                     {this.props.result.promotion === "Bellator" &&
-                        <div className="column height big-text is-two-fifths bellatorBackground">
-
-                            {this.props.result.location !== undefined && this.props.result.location.name && this.props.result.location.city && this.props.result.location.provState && this.props.result.location.country &&
-                              <h2 className="mobileLocation eventElementTop">
-                                {this.props.result.location.name}, {this.props.result.location.city}, {this.props.result.location.provState}, {this.props.result.location.country}
-                              </h2>
-                            }
-                            {this.props.result.location !== undefined && this.props.result.location.name && this.props.result.location.city && !this.props.result.location.provState && this.props.result.location.country &&
-                              <h2 className="mobileLocation eventElementTop">
-                                {this.props.result.location.name}, {this.props.result.location.city}, {this.props.result.location.country}
-                              </h2>
-                            }
-                            {this.props.result.location === undefined &&
-                              <h2 className="mobileLocation eventElementTop">
-                                NO LOCATION
-                              </h2>
-                            }
-                            <div className="verticalAlign" style={{}}>
-                                <h1 className="eventTitle">
-                                    {(this.props.result.event === this.props.result.otherName || this.props.result.otherName === undefined) &&
-                                        <div>{this.props.result.name}</div>
-                                    }
-                                    {(this.props.result.event !== this.props.result.otherName && this.props.result.otherName !== undefined) &&
-                                        <div>{this.props.result.otherName}</div>
-                                    }
-                                </h1>
-                            </div>
-                            <div className="eventElementBottom">{this.props.result.title}</div>
-                        </div>
+                        <Bellator eventDetails={this.props.result} />
                     }
 
                     {this.props.result.location !== undefined &&
                         <div className="column height">
                             <div className="verticalAlign textRotate inner">
-                                {this.state.timeObject}
+                                {this.state.eventDate}
                             </div>
                             <div className={`flag-icon-background flag-icon-${this.props.result.location.co}`} style={{ zIndex:-1,opacity:0.4,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
 
