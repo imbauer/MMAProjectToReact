@@ -11,7 +11,7 @@ module.exports =
         var weightClasses = /(?=\^)|(?=Women)|(?=(?<!Women..\s)Fly)|(?=(?<!Women..\s)Bantam)|(?=Featherweight)|(?=Lightweight)|(?=Welterweight)|(?=Middleweight)|(?=(?<!Light )Heavyweight)|(?=Light Heavyweight)/g;
         var fightSlots = /(?:vs\.)|weight/g;
         var eventDetailsParsing = /(?:.*UFC mixed martial arts event in \d{4})|Promotion(?=\w)|Information|Date|(?<!\s)\(|(?<=\d)-(?=\d)|\)Venue|(?<!\s)City|Event\schronology/g;
-        var eventParsing = /(?:was a.*?==Results==)|(?:is an upcoming.*?==Fight\scard==)|(?=promotion=)|(?:{{MMAevent end.*)|(?===Fight card==)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=venue)|(?=date\|\d{4}\|\d{2}\|\d{2})|(followingevent.*?\}})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?name)/g;
+        var eventParsing = /(?:was a.*?==Results==)|(?:is an upcoming.*?==Fight\scard==)|(?=promotion=)|(?:{{MMAevent end.*)|(?===Fight card==)|(?=== Fight card==)|(?===Fight card ==)|(?=== Fight card ==)|(city=\s\[\[.*?previousevent)|(city=\s\[\[.*?attendance)|(city=\[\[.*?attendance)|(?=venue)|(?=date\|\d{4}\|\d{2}\|\d{2})|(followingevent.*?\}})|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?name)/g;
         //  (?=city).*?\|   (?=(city=\[\[.*?\|))
         var splitEvents = /(?:MMAevent\scard\|)|(?:MMAevent\scard\s\|)/g;
         var splitFights = /(?:MMAevent\sbout\|)|(?:MMAevent\sbout\s\|)/g;
@@ -22,9 +22,13 @@ module.exports =
         var fightsTotal = [];
 
         body = body.replace(/<[^>]*>/g,'').replace(/\\n/g,'').replace(/\s\s+/g, ' ');
+        if (body.includes('#REDIRECT')) {
+            var redirect = body.replace(/(.*REDIRECT.*\[)|(\].*)/g, '');
+            return redirect;
+        }
         var info = body.split(eventParsing);
         info = info.filter(function(e){return e});
-        // console.log(info);
+        console.log(info);
         if (info[3].includes('date|')) {
             info.splice(3,1);
         }
@@ -183,7 +187,7 @@ module.exports =
         var weightClasses = /(?=\^)|(?=Women)|(?=(?<!Women..\s)Fly)|(?=(?<!Women..\s)Bantam)|(?=Featherweight)|(?=Lightweight)|(?=Welterweight)|(?=Middleweight)|(?=(?<!Light )Heavyweight)|(?=Light Heavyweight)/g;
         var fightSlots = /(?:vs\.)|weight/g;
         var eventDetailsParsing = /(?:.*UFC mixed martial arts event in \d{4})|Promotion(?=\w)|Information|Date|(?<!\s)\(|(?<=\d)-(?=\d)|\)Venue|(?<!\s)City|Event\schronology/g;
-        var eventParsing = /(?=name=)|(?:was a.*?==Results==)|(?:is an upcoming.*?==Fight\scard==)|(?=promotion=)|(?:{{MMAevent end.*)|(?===Fight card==)|(city=.*?\})|(city=\s)|(?=venue)|(?=\|date.*?venue)|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?name)/g;
+        var eventParsing = /(?=name=)|(?:was a.*?==Results==)|(?:is an upcoming.*?==Fight\scard==)|(?=promotion=)|(?:{{MMAevent end.*)|(?===Fight card==)|(?=== Fight card==)|(?===Fight card ==)|(?=== Fight card ==)|(city=.*?\})|(city=\s)|(?=venue)|(?=\|date.*?venue)|(?=\^)|(?:attendance=\|gate=\|)|(?:{\"batchcomplete.*?name)/g;
         //  (?=city).*?\|   (?=(city=\[\[.*?\|))
         var splitEvents = /(?:MMAevent\scard\|)|(?:MMAevent\scard\s\|)/g;
         var splitFights = /(?:MMAevent\sbout\|)|(?:MMAevent\sbout\s\|)/g;

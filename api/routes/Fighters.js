@@ -25,7 +25,10 @@ router.get('/fighter/:fighterName', function(req, res) {
             console.log('------------------------- Gonna Respond With Fighter -------------------------');
             console.log(fighter);
             console.log('-------------------------------------------------------------------------------');
-            var results = fighter.fightRecord[1][0].replace(/[A-Za-z]/g, '');
+            var record = fighter.fightRecord[1][0].replace(/[A-Za-z]/g, '');
+            var results = {};
+            results.nationality = fighter.co;
+            results.record = record
 
             res.send({results: results});
 

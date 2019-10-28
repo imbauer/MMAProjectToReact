@@ -19,21 +19,28 @@ function repeatProcess(event) {
         if(err){
             console.log(err + ' ERR: Stopped at ---> ' + url);
         } else {
-            var data = JSON.parse(body);
-            // console.log('=================================ALL EVENTS FOR SPECIFIC EVENT=============================');
-            // console.log(data);
-            // console.log('-------------------------------------------------------------------------------------------');
-            for (var i = 0; i < data.length; i++) {
-                mongodb.addEvent(data[i]);
-            }
-            if (data[0].nextEvent !== null || data[0].nextEvent !== '' || data[0].nextEvent !== undefined) {
-                // console.log(data[0].name + ' WORKED');
-                if (data[0].nextEvent.includes('following')) {
-                    console.log('Exited without issue');
-                    return;
+            try {
+                var data = JSON.parse(body);
+                console.log('================================= Returned Event and Type =================================');
+                console.log(data);
+                console.log(typeof data);
+                console.log('-------------------------------------------------------------------------------------------');
+                for (var i = 0; i < data.length; i++) {
+                    mongodb.addEvent(data[i]);
                 }
-                repeatProcess(data[0].nextEvent);
+                if (data[0].nextEvent !== null || data[0].nextEvent !== '' || data[0].nextEvent !== undefined) {
+                    // console.log(data[0].name + ' WORKED');
+                    if (data[0].nextEvent.includes('following')) {
+                        console.log('Exited without issue');
+                        return;
+                    }
+                    repeatProcess(data[0].nextEvent);
+                }
             }
+            catch(error) {
+                repeatProcess(body);
+            }
+
         }
     });
 }

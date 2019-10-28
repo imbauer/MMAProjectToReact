@@ -341,13 +341,21 @@ module.exports = {
         if (fighter !== undefined) {
 
             if (fighter.birth_place !== undefined && fighter.fightRecord !== undefined) {
-                var countryOptions = fighter.birth_place.replace(/\(|\)|today\s/g, '').split(', ');
+                var countryOptions = fighter.birth_place.replace(/\(|\)|today\s/g, '').replace(/,\s/g, ' ').replace(/,/g, ' ').split(' ');
                 console.log(countryOptions);
                 for (var i = countryOptions.length - 1; i >= 0; i--) {
                     if (dict[countryOptions[i]] !== undefined) {
                         fighter.co = dict[countryOptions[i]];
                         fighter.country = countryOptions[i];
                         break;
+                    }
+                    if (i < countryOptions.length - 1) {
+                        var combined = countryOptions[i] + ' ' + countryOptions[i + 1];
+                        if (dict[combined] !== undefined) {
+                            fighter.co = dict[combined];
+                            fighter.country = combined;
+                            break;
+                        }
                     }
                 }
                 console.log(fighter);

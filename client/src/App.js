@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { EventList } from './components'
 import "./App.css";
-import globe from './globeresize.png';
-import clock from './clockwhiteoutline.png';
-import arrows from './arrows2.png';
+import globe from './images/globeresize.png';
+import clock from './images/clockwhiteoutline.png';
+import arrows from './images/arrows2.png';
 
 class App extends Component {
     constructor(props) {

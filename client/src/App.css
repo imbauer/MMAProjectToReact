@@ -396,8 +396,8 @@ label + input[type=radio] + label {
 .styled select {
   background: #282c34;
   /* background:none; */
-  background-image:url('worldmapteal50.png');
-  background-size:60%;
+  background-image:url('./images/worldmapteal50.png');
+  background-size:55%;
   background-repeat:no-repeat;
   background-position:center;
   height: 100%;
@@ -410,7 +410,7 @@ label + input[type=radio] + label {
 }
 
 .styled:hover select {
-  background-image:url('worldmapteal80.png');
+  background-image:url('./images/worldmapteal80.png');
   transition: background 0.4s;
 }
 

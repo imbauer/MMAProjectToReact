@@ -57,6 +57,12 @@ class Fight extends Component {
 
 
     render() {
+        if (this.state.firstFighterRecord !== undefined && this.state.secondFighterRecord !== undefined) {
+            var record1 = this.state.firstFighterRecord.record;
+            var record2 = this.state.secondFighterRecord.record;
+            var nationality1 = this.state.firstFighterRecord.nationality;
+            var nationality2 = this.state.secondFighterRecord.nationality;
+        }
 
         console.log(this.state.fight);
 
@@ -65,11 +71,18 @@ class Fight extends Component {
 
                 {(this.state.fight.length === 4 || this.state.fight.length === 5) &&
                     <div className="columns is-vcentered is-mobile is-gapless" style={{paddingBottom:15+'px'}}>
-                        <div className="column is-3 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                            {this.state.fight[1]}
+                        <div className="column is-1 big-text fightFont" style={{color:'black',fontFamily:'Nunito'}}>
+
+                        </div>
+                        <div className="column is-2 fightFont" style={{color:'black',fontFamily: 'Work Sans',position:'relative'}}>
+                            {this.state.fight[1].split(" ", 2)[0]} <br />
+                            {this.state.fight[1].split(" ", 2)[1]} {this.state.fight[1].split(" ", 3)[2]}
+                            <div className={`flag-icon-background flag-icon-${nationality1}`} style={{ zIndex:-1,opacity:0.2,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+
+                            </div>
                         </div>
                         <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                            {this.state.firstFighterRecord}
+                            {record1}
                         </div>
                         <div className="column is-4 big-text" style={{backgroundColor:'gray'}}>
                             <h1 className="" style={{fontSize:1+'em',color:'black',fontWeight:200}}>
@@ -77,44 +90,66 @@ class Fight extends Component {
                             </h1>
                         </div>
                         <div className="column is-1 big-text fightFont" style={{color:'black',fontFamily:'Nunito'}}>
-                            {this.state.secondFighterRecord}
+                            {record2}
                         </div>
-                        <div className="column is-3 big-text fightFont" style={{color:'black',fontFamily:'Nunito'}}>
-                            {this.state.fight[3]}
+                        <div className="column is-2 big-text fightFont" style={{color:'black',fontFamily:'Nunito',position:'relative'}}>
+                            {this.state.fight[3].split(" ", 2)[0]} <br />
+                            {this.state.fight[3].split(" ", 2)[1]} {this.state.fight[3].split(" ", 3)[2]}
+                            <div className={`flag-icon-background flag-icon-${nationality2}`} style={{ zIndex:-1,opacity:0.2,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+
+                            </div>
+                        </div>
+                        <div className="column is-1 big-text fightFont" style={{color:'black',fontFamily:'Nunito'}}>
+
                         </div>
                     </div>
                 }
 
                 {(this.state.fight.length > 5) &&
-                    <div className="columns is-vcentered is-mobile is-gapless" style={{paddingBottom:15+'px',backgroundColor:'#F5F5F5'}}>
+                    <div className="columns is-vcentered is-mobile is-gapless" style={{paddingBottom:15+'px'}}>
+                    <div className="column is-1 big-text fightFont" style={{color:'black',fontFamily:'Nunito'}}>
+
+                    </div>
                     {(this.state.fight[2] === 2 || this.state.fight[2] === "2") &&
-                        <div className="column is-3 fightFont" style={{backgroundColor:'#FF0000',color:'black',fontFamily: 'Work Sans'}}>
-                            {this.state.fight[1]}
+                        <div className="column is-2 fightFont" style={{color:'black',fontFamily: 'Work Sans',position:'relative'}}>
+                            {this.state.fight[1].split(" ", 2)[0]} <br />
+                            {this.state.fight[1].split(" ", 2)[1]} {this.state.fight[1].split(" ", 3)[2]}
+                            <div className={`flag-icon-background flag-icon-${nationality1}`} style={{ zIndex:-1,opacity:0.2,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+
+                            </div>
                         </div>
                     }
                     {(this.state.fight[2] === 2 || this.state.fight[2] === "2") &&
-                        <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                            {this.state.firstFighterRecord}
+                        <div className="column is-1 fightFont" style={{backgroundColor:'#FF0000',color:'black',fontFamily: 'Work Sans'}}>
+                            {record1}
                         </div>
                     }
                     {(this.state.fight[4].includes('Draw') || this.state.fight[4].includes('No Contest') || this.state.fight[4].includes('NC')) &&
-                        <div className="column is-3 fightFont" style={{backgroundColor:'#D3D3D3',color:'black',fontFamily: 'Work Sans'}}>
-                            {this.state.fight[1]}
+                        <div className="column is-2 fightFont" style={{color:'black',fontFamily: 'Work Sans',position:'relative'}}>
+                            {this.state.fight[1].split(" ", 2)[0]} <br />
+                            {this.state.fight[1].split(" ", 2)[1]} {this.state.fight[1].split(" ", 3)[2]}
+                            <div className={`flag-icon-background flag-icon-${nationality1}`} style={{ zIndex:-1,opacity:0.2,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+
+                            </div>
                         </div>
                     }
                     {(this.state.fight[4].includes('Draw') || this.state.fight[4].includes('No Contest') || this.state.fight[4].includes('NC')) &&
-                        <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                            {this.state.firstFighterRecord}
+                        <div className="column is-1 fightFont" style={{backgroundColor:'#D3D3D3',color:'black',fontFamily: 'Work Sans'}}>
+                            {record1}
                         </div>
                     }
                     {(this.state.fight[2].includes("def")) &&
-                        <div className="column is-3 fightFont" style={{backgroundColor:'#00FA96',color:'black',fontFamily: 'Work Sans'}}>
-                            {this.state.fight[1]}
+                        <div className="column is-2 fightFont" style={{color:'black',fontFamily: 'Work Sans',position:'relative'}}>
+                            {this.state.fight[1].split(" ", 2)[0]} <br />
+                            {this.state.fight[1].split(" ", 2)[1]} {this.state.fight[1].split(" ", 3)[2]}
+                            <div className={`flag-icon-background flag-icon-${nationality1}`} style={{ zIndex:-1,opacity:0.2,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+
+                            </div>
                         </div>
                     }
                     {(this.state.fight[2].includes("def")) &&
-                        <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                            {this.state.firstFighterRecord}
+                        <div className="column is-1 fightFont" style={{backgroundColor:'#00FA96',color:'black',fontFamily: 'Work Sans'}}>
+                            {record1}
                         </div>
                     }
 
@@ -128,35 +163,50 @@ class Fight extends Component {
 
                     </div>
                         {(this.state.fight[2] === 2 || this.state.fight[2] === "2") &&
-                            <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                                {this.state.secondFighterRecord}
+                            <div className="column is-1 fightFont" style={{backgroundColor:'#00FA96',color:'black',fontFamily: 'Work Sans'}}>
+                                {record2}
                             </div>
                         }
                         {(this.state.fight[2] === 2 || this.state.fight[2] === "2") &&
-                            <div className="column is-3 fightFont" style={{backgroundColor:'#00FA96',color:'black',fontFamily: 'Work Sans'}}>
-                                {this.state.fight[3]}
+                            <div className="column is-2 fightFont" style={{color:'black',fontFamily: 'Work Sans',position:'relative'}}>
+                                {this.state.fight[3].split(" ", 2)[0]} <br />
+                                {this.state.fight[3].split(" ", 2)[1]} {this.state.fight[3].split(" ", 3)[2]}
+                                <div className={`flag-icon-background flag-icon-${nationality2}`} style={{ zIndex:-1,opacity:0.2,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+
+                                </div>
                             </div>
                         }
                         {(this.state.fight[4].includes('Draw') || this.state.fight[4].includes('No Contest') || this.state.fight[4].includes('NC')) &&
-                            <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                                {this.state.secondFighterRecord}
+                            <div className="column is-1 fightFont" style={{backgroundColor:'#D3D3D3',color:'black',fontFamily: 'Work Sans'}}>
+                                {record2} {nationality2}
                             </div>
                         }
                         {(this.state.fight[4].includes('Draw') || this.state.fight[4].includes('No Contest') || this.state.fight[4].includes('NC')) &&
-                            <div className="column is-3 fightFont" style={{backgroundColor:'#D3D3D3',color:'black',fontFamily: 'Work Sans'}}>
-                                {this.state.fight[3]}
+                            <div className="column is-2 fightFont" style={{color:'black',fontFamily: 'Work Sans',position:'relative'}}>
+                                {this.state.fight[3].split(" ", 2)[0]} <br />
+                                {this.state.fight[3].split(" ", 2)[1]} {this.state.fight[3].split(" ", 3)[2]}
+                                <div className={`flag-icon-background flag-icon-${nationality2}`} style={{ zIndex:-1,opacity:0.2,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+
+                                </div>
                             </div>
                         }
                         {(this.state.fight[2].includes("def")) &&
-                            <div className="column is-1 fightFont" style={{color:'black',fontFamily: 'Work Sans'}}>
-                                {this.state.secondFighterRecord}
+                            <div className="column is-1 fightFont" style={{backgroundColor:'#FF0000',color:'black',fontFamily: 'Work Sans'}}>
+                                {record2}
                             </div>
                         }
                         {(this.state.fight[2].includes("def")) &&
-                            <div className="column is-3 fightFont" style={{backgroundColor:'#FF0000',color:'black',fontFamily: 'Work Sans'}}>
-                                {this.state.fight[3]}
+                            <div className="column is-2 fightFont" style={{color:'black',fontFamily: 'Work Sans',position:'relative'}}>
+                                {this.state.fight[3].split(" ", 2)[0]} <br />
+                                {this.state.fight[3].split(" ", 2)[1]} {this.state.fight[3].split(" ", 3)[2]}
+                                <div className={`flag-icon-background flag-icon-${nationality2}`} style={{ zIndex:-1,opacity:0.2,backgroundSize:'cover',fontSize:1.7+'em',fontWeight:600,position:'absolute',right:0,top:0,width:100+'%',height:100+'%' }}>
+
+                                </div>
                             </div>
                         }
+                        <div className="column is-1 big-text fightFont" style={{color:'black',fontFamily:'Nunito'}}>
+
+                        </div>
 
 
                     </div>
